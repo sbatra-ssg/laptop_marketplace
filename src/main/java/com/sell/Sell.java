@@ -19,16 +19,22 @@ import com.jdbcconnection.SQLConnection;
  * Servlet implementation class Sell
  */
 @WebServlet("/Sell")
-public class SellShaurya extends HttpServlet {
+public class Sell extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
-	public static final String readQuery = "Select product_name, product_desc, product_price from available_to_sell";
+	static final Connection con = SQLConnection.createConnection();
+	
+	static PreparedStatement stm = null;
+	
+	public static final String readQuery = "Select product_id, product_name, product_desc, product_price, product_quantity, total_sold from available_to_sell";
+	
+	public static final String updateQuery = "Update available_to_sell set product_quantity = product_quantity - ?, total_sold = total_sold + ? where product_id = ?";
 
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SellShaurya() {
+    public Sell() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -39,16 +45,14 @@ public class SellShaurya extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		
-		Connection con = SQLConnection.createConnection();
-		
-		PreparedStatement stm = null;
 		try {
 			
 			stm = con.prepareStatement(readQuery);
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
+			
 		}
 		
 		try {
@@ -57,6 +61,7 @@ public class SellShaurya extends HttpServlet {
 			request.getSession().setAttribute("sell", rs);
 			
 			RequestDispatcher rd = request.getRequestDispatcher("Sell.jsp");
+			
 			rd.forward(request, response);
 			
 //			ArrayList lst = new ArrayList();
@@ -77,6 +82,36 @@ public class SellShaurya extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
+		Integer product_id = Integer.parseInt(request.getParameter("product_id"));
+		
+		Integer quantity = Integer.parseInt(request.getParameter("quantity"));
+		
+		try {
+			
+			stm = con.prepareStatement(updateQuery);
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+			
+		}
+		
+		try {
+			
+			stm.setInt(1, quantity);
+			
+			stm.setInt(2, quantity);
+			
+			stm.setInt(3, product_id);
+			
+			stm.execute();
+			
+			} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		doGet(request, response);
 		
 		
 	}

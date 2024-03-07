@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@page import = "java.sql.*" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,24 +13,41 @@
 <h5 style="text-align: center;" class="topp">FREE SHIPPING ALL OVER INDIA | EARN LOYALTY POINTS WITH EVERY ORDER</h5>
 
 <div class="topnav">
-  <a href="Home.jsp">Home</a>
-  <a href="HomePage.jsp">Show</a>
-  <a class="active" href="Sell.jsp">Sell</a>
-  <a href="Purchase.jsp">Purchase</a>
-  <a href="PL.jsp">Profit/Loss</a>
+	  <a class="active" href="Home.jsp">Home</a>
+	<% if (request.getSession().getAttribute("user") != null) {%>
+	  <a href="Show">Show</a>
+	  <a href="Sell">Sell</a>
+	  <a href="Purchase">Purchase</a>
+	  <a href="PL.jsp">Profit/Loss</a>
+	  <a href = "Logout">Logout</a>
+	  
+	  <%} %>
 </div>
 
-
-<div class="columns">
-  <ul class="price">
-    <li class="header">HP Laptop</li>
-    <li class="grey">Elitebook 30S</li>
-    <li>500Gb SSD</li>
-    <li>Quantity : </li>
-    <li>Price : 35000</li>
-    <li class="grey"><a href="#" class="button">SELL</a></li>
-  </ul>
-</div>
+<%if (request.getSession().getAttribute("sell") != null){
+	
+		ResultSet res = (ResultSet)request.getSession().getAttribute("sell");%>
+		
+  		<%while (res.next()) { %>
+			<div class="columns">
+	  			<ul class="price">
+		  			<li class="header">Brand : <%=res.getString(2) %></li>
+				    <li class="grey"><%=res.getString(3) %></li>
+				    <li>Price : <%=res.getDouble(4) %></li>
+				    <li>Available quantity : <%=res.getInt(5) %></li>
+			    <li class="grey">
+				    	<form method = "post" action = "Sell">
+				    		<label>Quantity : </label>
+				    		<input name = "quantity" type = "number" placeholder = "Enter purchase quantity" min = "1" max = "<%=res.getInt(5)%>"/>
+				    		<input name = "product_id" type = "hidden" value = <%= res.getInt(1)%> />
+				    		<input name = "sell" type = "submit" class="button" value = "SELL"/>
+				    	</form>
+			    	</li>
+			    </ul>
+	  		</div>
+  		<%}%>
+	
+	<% } %>
      
     
 <footer id="footer">

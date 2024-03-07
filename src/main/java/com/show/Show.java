@@ -22,7 +22,7 @@ import com.jdbcconnection.SQLConnection;
  * Servlet implementation class Sell
  */
 @WebServlet("/Show")
-public class ShowShaurya extends HttpServlet {
+public class Show extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	public static final String readQuery = "Select product_name, product_desc, product_price, product_quantity from available_to_sell";
@@ -30,7 +30,7 @@ public class ShowShaurya extends HttpServlet {
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ShowShaurya() {
+    public Show() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -61,7 +61,7 @@ public class ShowShaurya extends HttpServlet {
 		
 		try {
 			
-			rs = stm.executeQuery();						
+			rs = stm.executeQuery();	
 			
 			request.getSession().setAttribute("result", rs);
 			RequestDispatcher rd = request.getRequestDispatcher("Show.jsp");

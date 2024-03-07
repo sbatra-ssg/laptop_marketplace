@@ -21,36 +21,49 @@
 <body>
 <h5 style="text-align: center;" class="topp">FREE SHIPPING ALL OVER INDIA | EARN LOYALTY POINTS WITH EVERY ORDER</h5>
 
-<div class="topnav">
-  <a class="active" href="Home.jsp">Home</a>
-  <a href="HomePage.jsp">Show</a>
-  <a href="Sell.jsp">Sell</a>
-  <a href="Purchase.jsp">Purchase</a>
-  <a href="PL.jsp">Profit/Loss</a>
+	<div class="topnav">
+	  <a class="active" href="Home.jsp">Home</a>
+<% if (request.getSession().getAttribute("user") != null) {%>
+	  <a href="Show">Show</a>
+	  <a href="Sell">Sell</a>
+	  <a href="Purchase">Purchase</a>
+	  <a href="PL.jsp">Profit/Loss</a>
+	  <a href = "Logout">Logout</a>
+	  </div>
+	  <div>
+	  	<h1>Welcome Admin,</h1>
+	  	<p>This is a marketplace for buying and selling laptops of different brands.</p>
+	  	<p>Hope you'll like it !!</p>
+	  </div>
+	  
+	  <%} else {%>
+	  
   
   <div class="login-form">
-  <form>
+  <form method = "post" action = "Login">
     <h1>Login</h1>
     <div class="content">
       <div class="input-field">
-        <input type="email" placeholder="Email" autocomplete="nope">
+        <input type="email" placeholder="Email" autocomplete="nope" name = "username" >
       </div>
       <div class="input-field">
-        <input type="password" placeholder="Password" autocomplete="new-password">
+        <input type="password" placeholder="Password" autocomplete="new-password" name = "password">
       </div>
     </div>
     <div class="action">
-      <button>Sign in</button>
+      <input type = "submit" value = "Sign In" class = "button"/>
     </div>
   </form>
   <img class="title-image" src="logo-white.png" alt="iphone-mockup">
 </div>
 
+<%} %>
 
 
 
 
-</div>
+
+
 
 
 <footer id="footer">

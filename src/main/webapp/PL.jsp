@@ -13,10 +13,11 @@
 
 <div class="topnav">
   <a href="Home.jsp">Home</a>
-  <a href="HomePage.jsp">Show</a>
-  <a href="Sell.jsp">Sell</a>
-  <a href="Purchase.jsp">Purchase</a>
+  <a href="Show">Show</a>
+  <a href="Sell">Sell</a>
+  <a href="Purchase">Purchase</a>
   <a class="active" href="PL.jsp">Profit/Loss</a>
+  <a href = "">Logout</a>
 </div>
 
 
