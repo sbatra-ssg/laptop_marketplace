@@ -57,13 +57,12 @@ public class Show extends HttpServlet {
 		}
 		
 		
-		ResultSet rs = null;
 		
 		try {
 			
-			rs = stm.executeQuery();	
+			ResultSet rs = stm.executeQuery();	
 			
-			request.getSession().setAttribute("result", rs);
+			request.getSession().setAttribute("show", rs);
 			RequestDispatcher rd = request.getRequestDispatcher("Show.jsp");
 			rd.forward(request, response);
 		}

@@ -61,7 +61,7 @@ public class Login extends HttpServlet {
 			
 			PrintWriter p = response.getWriter();
 			
-			p.print("<h1>Username and password doesn't match</h1>");
+			p.print("<h1 style = 'color : red; text-align: center; margin-top : 250px'>Username and password doesn't match !!!</h1>");
 		}
 		
 		// TODO Auto-generated method stub

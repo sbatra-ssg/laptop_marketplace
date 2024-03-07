@@ -14,18 +14,19 @@
 <h5 style="text-align: center;" class="topp">FREE SHIPPING ALL OVER INDIA | EARN LOYALTY POINTS WITH EVERY ORDER</h5>
 
 <div class="topnav">
-  <a href="Home.jsp">Home</a>
-  <a href="Show">Show</a>
-  <a href="Sell">Sell</a>
-  <a class="active" href="Purchase">Purchase</a>
-  <a href="PL.jsp">Profit/Loss</a>
-  <a href = "Logout">Logout</a>
-</div>
+		<a href="Home.jsp">Home</a>
+  
 
 
-<%if (request.getSession().getAttribute("purchase") != null){
+<%if (request.getSession().getAttribute("purchase") != null && request.getSession().getAttribute("user") != null){
 	
 		ResultSet res = (ResultSet)request.getSession().getAttribute("purchase");%>
+		
+		  <a href="Show">Show</a>
+		  <a href="Sell">Sell</a>
+		  <a class="active" href="Purchase">Purchase</a>
+		  <a href = "Logout">Logout</a>
+		</div>
 		
   		<%while (res.next()) { %>
 			<div class="columns">
@@ -36,10 +37,10 @@
 				    <li>Available quantity : <%=res.getInt(5) %></li>
 			    	<li class="grey">
 				    	<form method = "post" action = "Purchase">
-				    		<label>Quantity : </label>
-				    		<input name = "quantity" type = "number" placeholder = "Enter purchase quantity" min = "1" max = "<%=res.getInt(5) %>"/>
+				    		<label class = "quan">Quantity : </label>
+				    		<input class = "quan" name = "quantity" type = "number" placeholder = "Enter purchase quantity" min = "1" max = "<%=res.getInt(5) %>"/>
 				    		<input name = "product_id" type = "hidden" value = <%= res.getInt(1)%> />
-				    		<input name = "buy" type = "submit" class="button" value = "BUY"/>
+				    		<input name = "buy" type = "submit" class="button" value = "Buy"/>
 				    	</form>
 			    	</li>
 			    </ul>
@@ -53,3 +54,4 @@
 </footer>
 </body>
 </html>
+

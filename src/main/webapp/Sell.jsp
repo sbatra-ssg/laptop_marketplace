@@ -13,18 +13,17 @@
 <h5 style="text-align: center;" class="topp">FREE SHIPPING ALL OVER INDIA | EARN LOYALTY POINTS WITH EVERY ORDER</h5>
 
 <div class="topnav">
-	  <a class="active" href="Home.jsp">Home</a>
+	  <a href="Home.jsp">Home</a>
 	<% if (request.getSession().getAttribute("user") != null) {%>
 	  <a href="Show">Show</a>
-	  <a href="Sell">Sell</a>
+	  <a href="Sell" class = "active">Sell</a>
 	  <a href="Purchase">Purchase</a>
-	  <a href="PL.jsp">Profit/Loss</a>
 	  <a href = "Logout">Logout</a>
 	  
 	  <%} %>
 </div>
 
-<%if (request.getSession().getAttribute("sell") != null){
+<%if (request.getSession().getAttribute("sell") != null && request.getSession().getAttribute("user") != null){
 	
 		ResultSet res = (ResultSet)request.getSession().getAttribute("sell");%>
 		
@@ -37,10 +36,10 @@
 				    <li>Available quantity : <%=res.getInt(5) %></li>
 			    <li class="grey">
 				    	<form method = "post" action = "Sell">
-				    		<label>Quantity : </label>
-				    		<input name = "quantity" type = "number" placeholder = "Enter purchase quantity" min = "1" max = "<%=res.getInt(5)%>"/>
+				    		<label class = "quan">Quantity : </label>
+				    		<input class = "quan" name = "quantity" type = "number" placeholder = "Enter quantity for sale" min = "1" max = "<%=res.getInt(5)%>"/>
 				    		<input name = "product_id" type = "hidden" value = <%= res.getInt(1)%> />
-				    		<input name = "sell" type = "submit" class="button" value = "SELL"/>
+				    		<input name = "sell" type = "submit" class="button" value = "Sell"/>
 				    	</form>
 			    	</li>
 			    </ul>

@@ -27,22 +27,23 @@
 	  <a href="Show">Show</a>
 	  <a href="Sell">Sell</a>
 	  <a href="Purchase">Purchase</a>
-	  <a href="PL.jsp">Profit/Loss</a>
 	  <a href = "Logout">Logout</a>
 	  </div>
 	  <div>
-	  	<h1>Welcome Admin,</h1>
-	  	<p>This is a marketplace for buying and selling laptops of different brands.</p>
-	  	<p>Hope you'll like it !!</p>
+	  	<h1 class = "hometext">Welcome Admin,</h1>
+	  	<p class = "hometext">This is a marketplace for buying and selling laptops of different brands.</p>
+	  	<p class = "homepara">Hope you'll like it !!</p>
 	  </div>
 	  
 	  <%} else {%>
 	  
   
   <div class="login-form">
-  <form method = "post" action = "Login">
-    <h1>Login</h1>
+  <img class="title-image" src="logo-white.png" alt="iphone-mockup">
+  <form method = "post" action = "Login" class = "register">
     <div class="content">
+    <br></br>
+    <h1>Login</h1>
       <div class="input-field">
         <input type="email" placeholder="Email" autocomplete="nope" name = "username" >
       </div>
@@ -50,11 +51,10 @@
         <input type="password" placeholder="Password" autocomplete="new-password" name = "password">
       </div>
     </div>
-    <div class="action">
+    <div class="content">
       <input type = "submit" value = "Sign In" class = "button"/>
     </div>
   </form>
-  <img class="title-image" src="logo-white.png" alt="iphone-mockup">
 </div>
 
 <%} %>

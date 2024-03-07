@@ -14,20 +14,19 @@
 <h5 style="text-align: center;" class="topp">FREE SHIPPING ALL OVER INDIA | EARN LOYALTY POINTS WITH EVERY ORDER</h5>
                 
 <div class="topnav">
-	  <a class="active" href="Home.jsp">Home</a>
+	  <a href="Home.jsp">Home</a>
 	<% if (request.getSession().getAttribute("user") != null) {%>
-	  <a href="Show">Show</a>
+	  <a href="Show" class = "active">Show</a>
 	  <a href="Sell">Sell</a>
 	  <a href="Purchase">Purchase</a>
-	  <a href="PL.jsp">Profit/Loss</a>
 	  <a href = "Logout">Logout</a>
 	  
 	  <%} %>
 </div>
 
-<%if (request.getSession().getAttribute("result") != null){
+<%if (request.getSession().getAttribute("show") != null ){
 	
-		ResultSet res = (ResultSet)request.getSession().getAttribute("result");%>
+		ResultSet res = (ResultSet)request.getSession().getAttribute("show");%>
 		
   		<%while (res.next()) { %>
 			<div class="columns">

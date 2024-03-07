@@ -24,11 +24,15 @@ public class Purchase extends HttpServlet {
 	
 	static final Connection con = SQLConnection.createConnection();
 	
-	static PreparedStatement stm = null;
+	static PreparedStatement stm1 = null;
+	
+	static PreparedStatement stm2 = null;
 	
 	public static final String readQuery = "Select product_id, product_name, product_desc, product_price, product_quantity, total_purchased from available_to_purchase";
 
-	public static final String updateQuery = "Update available_to_purchase set product_quantity = product_quantity - ? , total_purchased =  total_purchased + ? where product_id = ?";
+	public static final String updatePurchase = "Update available_to_purchase set product_quantity = product_quantity - ? , total_purchased =  total_purchased + ? where product_id = ?";
+	
+	public static final String updateSell = "Update available_to_sell set product_quantity = product_quantity + ? where product_id = ?";
 
        
     /**
@@ -48,7 +52,7 @@ public class Purchase extends HttpServlet {
 		
 		try {
 			
-			stm = con.prepareStatement(readQuery);
+			stm1 = con.prepareStatement(readQuery);
 			
 		} catch (SQLException e) {
 			
@@ -58,7 +62,7 @@ public class Purchase extends HttpServlet {
 		
 		try {
 			
-			ResultSet rs = stm.executeQuery();
+			ResultSet rs = stm1.executeQuery();
 			
 			request.getSession().setAttribute("purchase", rs);
 			
@@ -84,7 +88,9 @@ public class Purchase extends HttpServlet {
 				
 		try {
 			
-			stm = con.prepareStatement(updateQuery);
+			stm1 = con.prepareStatement(updatePurchase);
+			
+			stm2 = con.prepareStatement(updateSell);
 			
 		} catch (SQLException e) {
 			
@@ -94,32 +100,29 @@ public class Purchase extends HttpServlet {
 		
 		try {
 			
-			stm.setInt(1, quantity);
+			stm1.setInt(1, quantity);
 			
-			stm.setInt(2, quantity);
+			stm1.setInt(2, quantity);
 			
-			stm.setInt(3, productId);
+			stm1.setInt(3, productId);
 			
-			stm.execute();
+			stm2.setInt(1, quantity);
 			
-//			request.getSession().setAttribute("purchase", rs);
+			stm2.setInt(2, productId);
 			
-//			RequestDispatcher rd = request.getRequestDispatcher("Purchase.jsp");
-//			
-//			rd.forward(request, response);
+			stm1.execute();
+			
+			stm2.execute();
+			
 			
 		} catch (SQLException e) {
 						
 			e.printStackTrace();
 		}
 		
-//		RequestDispatcher rd = request.getRequestDispatcher("Purchase.jsp");
-//		
-//		rd.forward(request, response);
 		
 		doGet(request, response);
 		
-		// TODO Auto-generated method stub
 	}
 
 }
